@@ -1,0 +1,1 @@
+const oprava = new OpravaTitulu();

@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <title>Oprava jmen</title>
+    </head>
+
+    <body>
+      <h3>A demonstration of how to access a Text Field</h3>
+
+<textarea rows="8" cols="50" id="myText">Sem vložte jména </textarea>
+
+<p>Click the "Try it" button to get the text in the text field.</p>
+
+<button onclick="opravitJmena()">Opravit jména</button>
+
+<p id="prostorNaJmena"></p>
+
+        <script>
+        function opravitJmena() {
+          var novySeznamJmen = "";
+          var vlozenaJmena = document.getElementById("myText").value;
+          var jmena = vlozenaJmena.split("\n"); //rozdělit jména
+
+          // pro každé jméno
+          for (i = 0; i < jmena.length; i++) {
+            // vybrat jedno jména
+              var aktualniJmeno = jmena[i];
+              aktualniJmeno = aktualniJmeno.toLocaleLowerCase();
+
+              // opakování protože nevím jak najít a nahradit všechny tečky, čárky a mezery
+              for (t = 0; t < 10; t++) {
+                aktualniJmeno = aktualniJmeno.replace("ph.d", " ph");
+                aktualniJmeno = aktualniJmeno.replace("phd", " ph");
+                aktualniJmeno = aktualniJmeno.replace(",", " ");
+                aktualniJmeno = aktualniJmeno.replace(".", " ");
+                aktualniJmeno = aktualniJmeno.replace("  ", " ");
+              }
+
+              // rozdělení jména do array
+              var aktualniJmeno = aktualniJmeno.split(" ");
+
+              // funkce na obě výměny
+              function prepsatVsechnyTituly(hledane, opravene) {
+                var sestava = "";
+                for (n = 0; n < hledane.length; n++) {
+                  if (aktualniJmeno.includes(hledane[n])) {
+                    sestava += opravene[n];
+                    aktualniJmeno.splice(aktualniJmeno.indexOf(hledane[n]), 1);
+                  }
+                } // jestliže je seznam prázdný přidat prázdné místo místo null
+                if (sestava == null) {
+                  sestava = "";
+                }
+                return sestava;
+              }
+
+              // tituly před jmény
+              var hledejTituly1 = ["prof", "doc", "ing", "mgr", "mudr", "bc"];
+              var opraveneTituly1 = ["prof. ", "doc. ", "Ing. ", "Mgr. ", "MUDr. ", "Bc. "];
+              var sestaveniPredJmenem = prepsatVsechnyTituly(hledejTituly1, opraveneTituly1);
+
+              // tituly za jmény
+              var hledejTituly2 = ["dis", "ph", "csc", "fesc", "facc", "mba", "mha"];
+              var opraveneTituly2 = [", DiS", ", Ph.D.", ", CSc.", ", FESC", ", FACC", ", MBA", ", MHA"];
+              var sestaveniZaJmenem = prepsatVsechnyTituly(hledejTituly2, opraveneTituly2);
+
+              // sestavit cele jmeno, první písmena velká
+              konecnyVysledek = sestaveniPredJmenem + aktualniJmeno[0].charAt(0).toUpperCase() + aktualniJmeno[0].slice(1) + " " + aktualniJmeno[1].charAt(0).toUpperCase() + aktualniJmeno[1].slice(1) + sestaveniZaJmenem;
+              // přidání jména do finálního seznamu
+              novySeznamJmen += konecnyVysledek + " <br>";
+          }
+          // vytisknout celý seznam do HTML
+          document.getElementById("prostorNaJmena").innerHTML = novySeznamJmen.join("<br>");
+
+        }
+
+        </script>
+    </body>
+</html>
