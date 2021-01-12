@@ -59,8 +59,8 @@ class Jmena {
             }
         }
         this.vstupniJmeno = jmeno;
-        //console.log("test 5: " + this.vstupniJmeno);
-        //console.log("Test 3: " + this.titulPredJmenem + jmeno + this.titulZaJmenem); // funguje
+        console.log("test 5: " + this.vstupniJmeno);
+        console.log("Test 3: " + this.titulPredJmenem + jmeno + this.titulZaJmenem); // funguje
     }
 
     rozdelitJmeno(jmeno) {
@@ -70,23 +70,23 @@ class Jmena {
         if (jmeno.length == 2) {
             this.vlastniJmeno = jmeno[0].charAt(0).toUpperCase() + jmeno[0].slice(1);
             this.vlastniPrijmeni = jmeno[1].charAt(0).toUpperCase() + jmeno[1].slice(1);
-            //console.log("test 8: " + this.vlastniPrijmeni);
+            console.log("test 8: " + this.vlastniPrijmeni);
         } else if (jmeno.length == 3) {
             this.vlastniJmeno = jmeno[0].charAt(0).toUpperCase() + jmeno[0].slice(1)
             this.vlastniPrijmeni = jmeno[1].charAt(0).toUpperCase() + jmeno[1].slice(1)
             this.vlastniPrijmeni = this.vlastniPrijmeni + " " + jmeno[2].charAt(0).toUpperCase() + jmeno[2].slice(1)
-            //console.log("test 9: " + this.vlastniPrijmeni);
+            console.log("test 9: " + this.vlastniPrijmeni);
         }
     }
 
     sestavJmeno() {
         if (this.prehodit) {
-            this.celeJmeno = this.titulPredJmenem + this.vlastniPrijmeni + " " + this.vlastniJmeno + this.titulZaJmenem;
+            this.celeJmeno = this.titulPredJmenem.join("") + this.vlastniPrijmeni + " " + this.vlastniJmeno + this.titulZaJmenem.join("");
         } else {
-            this.celeJmeno = this.titulPredJmenem + this.vlastniJmeno + " " + this.vlastniPrijmeni + this.titulZaJmenem;
+            this.celeJmeno = this.titulPredJmenem.join("") + this.vlastniJmeno + " " + this.vlastniPrijmeni + this.titulZaJmenem.join("");
         }
-        //console.log("test na zaver: " + this.titulPredJmenem);
-        //console.log("test celeho jmena: " + this.celeJmeno)
+        console.log("test na zaver: " + this.titulPredJmenem);
+        console.log("test celeho jmena: " + this.celeJmeno)
     }
 
 }
